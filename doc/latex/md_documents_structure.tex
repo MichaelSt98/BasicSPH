@@ -1,0 +1,69 @@
+\hypertarget{md_documents_structure_autotoc_md93}{}\doxysection{Folders}\label{md_documents_structure_autotoc_md93}
+
+\begin{DoxyItemize}
+\item {\bfseries{bin}}\+: output executables go here (for the app, tests and spikes)
+\item {\bfseries{build}}\+: containing all the object files (removed by clean)
+\item {\bfseries{doc}}\+: documentation files
+\item {\bfseries{include}}\+: all project header files, all necessary third-\/party header files (which are not in /usr/local/include)
+\item {\bfseries{lib}}\+: any library that get compiled by the project, third party or any needed in development
+\item {\bfseries{spike}}\+: smaller classes or files to test technologies or ideas
+\item {\bfseries{src}}\+: the application and application\textquotesingle{}s source files
+\item {\bfseries{test}}\+: all test code files
+\end{DoxyItemize}\hypertarget{md_documents_structure_autotoc_md94}{}\doxysection{Files}\label{md_documents_structure_autotoc_md94}
+
+\begin{DoxyItemize}
+\item {\bfseries{Makefile}}\+: Makefile
+\item {\bfseries{\mbox{\hyperlink{_r_e_a_d_m_e_8md}{R\+E\+A\+D\+M\+E.\+md}}}}\+: Readme file in markdown syntax
+\end{DoxyItemize}
+
+\href{https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html}{\texttt{ C\+Make introduction\+: project structure}}
+
+
+\begin{DoxyItemize}
+\item project
+\begin{DoxyItemize}
+\item .gitignore
+\item \mbox{\hyperlink{_r_e_a_d_m_e_8md}{R\+E\+A\+D\+M\+E.\+md}}
+\item L\+I\+C\+E\+N\+C\+E.\+md
+\item C\+Make\+Lists.\+txt
+\item cmake
+\begin{DoxyItemize}
+\item Find\+Some\+Lib.\+cmake
+\item something\+\_\+else.\+cmake
+\end{DoxyItemize}
+\item include
+\begin{DoxyItemize}
+\item project
+\begin{DoxyItemize}
+\item lib.\+hpp
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item src
+\begin{DoxyItemize}
+\item C\+Make\+Lists.\+txt
+\item lib.\+cpp
+\end{DoxyItemize}
+\item apps
+\begin{DoxyItemize}
+\item C\+Make\+Lists.\+txt
+\item app.\+cpp
+\end{DoxyItemize}
+\item tests
+\begin{DoxyItemize}
+\item C\+Make\+Lists.\+txt
+\item testlib.\+cpp
+\end{DoxyItemize}
+\item docs
+\begin{DoxyItemize}
+\item C\+Make\+Lists.\+txt
+\end{DoxyItemize}
+\item extern
+\begin{DoxyItemize}
+\item googletest
+\end{DoxyItemize}
+\item scripts
+\begin{DoxyItemize}
+\item helper.\+py 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}

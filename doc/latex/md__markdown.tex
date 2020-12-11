@@ -1,0 +1,152 @@
+Short reference sheet for Markdown. Be aware that some things may not work properly in dependence of the used Markdown flavor.\hypertarget{md__markdown_autotoc_md10}{}\doxysection{Header 1}\label{md__markdown_autotoc_md10}
+\hypertarget{md__markdown_autotoc_md11}{}\doxysubsection{Header 2}\label{md__markdown_autotoc_md11}
+\hypertarget{md__markdown_autotoc_md12}{}\doxysubsubsection{Header 3}\label{md__markdown_autotoc_md12}
+\hypertarget{md__markdown_autotoc_md13}{}\doxyparagraph{Header 4}\label{md__markdown_autotoc_md13}
+\label{md__markdown_autotoc_md14}%
+\Hypertarget{md__markdown_autotoc_md14}%
+\doxysubparagraph*{Header 5}\hypertarget{md__markdown_autotoc_md15}{}\doxysection{Emphasis}\label{md__markdown_autotoc_md15}
+Emphasis, aka italics, with {\itshape asterisks} or {\itshape underscores}.
+
+Strong emphasis, aka bold, with {\bfseries{asterisks}} or {\bfseries{underscores}}.
+
+Combined emphasis with {\bfseries{asterisks and {\itshape underscores}}}.
+
+Strikethrough uses two tildes. \sout{Scratch this.}\hypertarget{md__markdown_autotoc_md16}{}\doxysection{Lists}\label{md__markdown_autotoc_md16}
+
+\begin{DoxyEnumerate}
+\item First ordered list item
+\item Another item
+\begin{DoxyItemize}
+\item Unordered sub-\/list.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Actual numbers don\textquotesingle{}t matter, just that it\textquotesingle{}s a number
+\begin{DoxyEnumerate}
+\item Ordered sub-\/list
+\end{DoxyEnumerate}
+\item And another item.
+
+You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we\textquotesingle{}ll use three here to also align the raw Markdown).
+
+To have a line break without a paragraph, you will need to use two trailing spaces.\+⋅⋅ Note that this line is separate, but within the same paragraph.\+⋅⋅ (This is contrary to the typical G\+FM line break behaviour, where trailing spaces are not required.)
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Unordered list can use asterisks
+\item Or minuses
+\item Or pluses
+\end{DoxyItemize}\hypertarget{md__markdown_autotoc_md17}{}\doxysection{Links}\label{md__markdown_autotoc_md17}
+\href{https://www.google.com}{\texttt{ I\textquotesingle{}m an inline-\/style link}}
+
+\href{https://www.google.com}{\texttt{ I\textquotesingle{}m an inline-\/style link with title}}
+
+\href{https://www.mozilla.org}{\texttt{ I\textquotesingle{}m a reference-\/style link}}
+
+\href{http://slashdot.org}{\texttt{ You can use numbers for reference-\/style link definitions}}
+
+Or leave it empty and use the \href{http://www.reddit.com}{\texttt{ link text itself}}.
+
+U\+R\+Ls and U\+R\+Ls in angle brackets will automatically get turned into links. \href{http://www.example.com}{\texttt{ http\+://www.\+example.\+com}} or \href{http://www.example.com}{\texttt{ http\+://www.\+example.\+com}} and sometimes example.\+com (but not on Github, for example).
+
+Some text to show that the reference links can follow later.\hypertarget{md__markdown_autotoc_md18}{}\doxysection{Images}\label{md__markdown_autotoc_md18}
+Here\textquotesingle{}s our logo (hover to see the title text)\+:
+
+Inline-\/style\+: 
+
+Reference-\/style\+: \hypertarget{md__markdown_autotoc_md19}{}\doxysection{Code and Syntax Highlighting}\label{md__markdown_autotoc_md19}
+Inline {\ttfamily code} has {\ttfamily back-\/ticks around} it.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var s = "{}JavaScript syntax highlighting"{};}
+\DoxyCodeLine{alert(s);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{s = "{}Python syntax highlighting"{}}
+\DoxyCodeLine{print(s)}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{No language indicated, so no syntax highlighting. }
+\DoxyCodeLine{But let's throw in a <b>tag</b>.}
+\end{DoxyCode}
+\hypertarget{md__markdown_autotoc_md20}{}\doxysection{Tables}\label{md__markdown_autotoc_md20}
+Colons can be used to align columns.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tables  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Are  }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Cool   }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Tables  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Are  }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Cool   }\\\cline{1-3}
+\endhead
+col 3 is  &\PBS\centering right-\/aligned  &\PBS\raggedleft \$1600   \\\cline{1-3}
+col 2 is  &\PBS\centering centered  &\PBS\raggedleft \$12   \\\cline{1-3}
+zebra stripes  &\PBS\centering are neat  &\PBS\raggedleft \$1   \\\cline{1-3}
+\end{longtabu}
+
+
+There must be at least 3 dashes separating each header cell. The outer pipes ($\vert$) are optional, and you don\textquotesingle{}t need to make the raw Markdown line up prettily. You can also use inline Markdown.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Markdown  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Less  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pretty   }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Markdown  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Less  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pretty   }\\\cline{1-3}
+\endhead
+{\itshape Still}  &{\ttfamily renders}  &{\bfseries{nicely}}   \\\cline{1-3}
+1  &2  &3   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md__markdown_autotoc_md21}{}\doxysection{Blockquotes}\label{md__markdown_autotoc_md21}
+\begin{quote}
+Blockquotes are very handy in email to emulate reply text. This line is part of the same quote. \end{quote}
+
+
+Quote break.
+
+\begin{quote}
+This is a very long line that will still be quoted properly when it wraps. Oh boy let\textquotesingle{}s keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can {\itshape put} {\bfseries{Markdown}} into a blockquote. \end{quote}
+\hypertarget{md__markdown_autotoc_md22}{}\doxysection{Inline H\+T\+ML}\label{md__markdown_autotoc_md22}
+You can also use raw H\+T\+ML in your Markdown, and it\textquotesingle{}ll mostly work pretty well.
+
+
+\begin{DoxyDescription}
+\item[Definition list ]Is something people use sometimes.
+
+
+\item[Markdown in H\+T\+ML ]Does {\itshape not} work {\bfseries{very}} well. Use H\+T\+ML {\itshape tags}. 
+\end{DoxyDescription}\hypertarget{md__markdown_autotoc_md23}{}\doxysection{Horizontal}\label{md__markdown_autotoc_md23}
+Three or more...
+
+\DoxyHorRuler{0}
+
+
+Hyphens
+
+\DoxyHorRuler{0}
+
+
+Asterisks
+
+\DoxyHorRuler{0}
+
+
+Underscores\hypertarget{md__markdown_autotoc_md25}{}\doxysection{You\+Tube Videos}\label{md__markdown_autotoc_md25}
+They can\textquotesingle{}t be added directly but you can add an image with a link to the video like this\+:
+
+\href{http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+}{\texttt{ }} Or, in pure Markdown, but losing the image sizing and border\+:
+
+\href{http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE}{\texttt{ }} Referencing a bug by \#bug\+ID in your git commit links it to the slip. For example \#1. 

@@ -1,0 +1,579 @@
+\hypertarget{md_documents__c_make_introduction_autotoc_md10}{}\doxysection{Links}\label{md_documents__c_make_introduction_autotoc_md10}
+
+\begin{DoxyItemize}
+\item \href{https://gitlab.kitware.com/cmake/cmake}{\texttt{ Repository}}
+\item \href{https://github.com/onqtam/awesome-cmake}{\texttt{ Awesome-\/\+C\+Make list}}
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md11}{}\doxysubsection{Documentation}\label{md_documents__c_make_introduction_autotoc_md11}
+
+\begin{DoxyItemize}
+\item \href{https://cmake.org/cmake/help/v3.19/}{\texttt{ C\+Make official documentation}}
+\item \href{http://www.aosabook.org/en/cmake.html}{\texttt{ The Architecture of Open Source Applications}}
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md12}{}\doxysubsection{Tutorials \& Instructions}\label{md_documents__c_make_introduction_autotoc_md12}
+
+\begin{DoxyItemize}
+\item \href{https://gist.github.com/mbinna/c61dbb39bca0e4fb7d1f73b0d66a4fd1}{\texttt{ Effective Modern C\+Make (Dos \& Don\textquotesingle{}ts)}}
+\item \href{https://cliutils.gitlab.io/modern-cmake/}{\texttt{ Git\+Book\+: Introduction to Modern C\+Make}}
+\item \href{https://github.com/dev-cafe/cmake-cookbook}{\texttt{ C\+Make Cookbook}}
+\item \href{https://llvm.org/docs/CMakePrimer.html}{\texttt{ C\+Make Primer}}
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md13}{}\doxysubsection{Videos}\label{md_documents__c_make_introduction_autotoc_md13}
+
+\begin{DoxyItemize}
+\item \href{https://www.youtube.com/watch?v=HPMvU64RUTY}{\texttt{ Intro to C\+Make}}
+\item \href{https://www.youtube.com/watch?v=eC9-iRN2b04}{\texttt{ Using Modern C\+Make Patterns to Enforce a Good Modular Design}}
+\item \href{https://www.youtube.com/watch?v=bsXLMQ6WgIk}{\texttt{ Effective C\+Make}}
+\item \href{https://www.youtube.com/watch?v=JsjI5xr1jxM}{\texttt{ Embracing Modern C\+Make}}
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md14}{}\doxysection{Basics}\label{md_documents__c_make_introduction_autotoc_md14}
+\hypertarget{md_documents__c_make_introduction_autotoc_md15}{}\doxysubsection{C\+Make Version}\label{md_documents__c_make_introduction_autotoc_md15}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#minmum CMake version}
+\DoxyCodeLine{cmake\_minimum\_required(VERSION 3.12)}
+\DoxyCodeLine{if(\$\{CMAKE\_VERSION\} VERSION\_LESS 3.12)}
+\DoxyCodeLine{    cmake\_policy(VERSION \$\{CMAKE\_MAJOR\_VERSION\}.\$\{CMAKE\_MINOR\_VERSION\})}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md16}{}\doxysubsection{V\+A\+R\+I\+A\+B\+L\+ES}\label{md_documents__c_make_introduction_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Local variable}
+\DoxyCodeLine{set(MY\_VARIABLE "{}value"{})}
+\DoxyCodeLine{set(MY\_LIST "{}one"{} "{}two"{})}
+\DoxyCodeLine{\# Cache variable}
+\DoxyCodeLine{set(MY\_CACHE\_VARIABLE "{}VALUE"{} CACHE STRING "{}Description"{})}
+\DoxyCodeLine{\# Environmental variables}
+\DoxyCodeLine{set(ENV\{variable\_name\} value) \#access via \$ENV\{variable\_name\}}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md17}{}\doxysubsection{P\+R\+O\+P\+E\+R\+T\+I\+ES}\label{md_documents__c_make_introduction_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set\_property(TARGET TargetName PROPERTY CXX\_STANDARD 11)}
+\DoxyCodeLine{set\_target\_properties(TargetName PROPERTIES CXX\_STANDARD 11)}
+\DoxyCodeLine{get\_property(ResultVariable TARGET TargetName PROPERTY CXX\_STANDARD)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md18}{}\doxysubsection{Output folders}\label{md_documents__c_make_introduction_autotoc_md18}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# set output folders}
+\DoxyCodeLine{set(PROJECT\_SOURCE\_DIR)}
+\DoxyCodeLine{set(CMAKE\_SOURCE\_DIR ...)}
+\DoxyCodeLine{set(CMAKE\_BINARY\_DIR \$\{CMAKE\_SOURCE\_DIR\}\$/bin)}
+\DoxyCodeLine{set(EXECUTABLE\_OUTPUT\_PATH \$\{CMAKE\_BINARY\_DIR\})}
+\DoxyCodeLine{set(LIBRARY\_OUTPUT\_PATH \$\{CMAKE\_BINARY\_DIR\})}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md19}{}\doxysubsection{Sources}\label{md_documents__c_make_introduction_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# set sources}
+\DoxyCodeLine{set(SOURCES example.cu)}
+\DoxyCodeLine{file(GLOB SOURCES *.cu)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md20}{}\doxysubsection{Executables \& targets}\label{md_documents__c_make_introduction_autotoc_md20}
+Add executable/create target\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#add\_executable(example \$\{PROJECT\_SOURCE\_DIR\}/example.cu)}
+\DoxyCodeLine{add\_executable(miluphcuda \$\{SOURCES\})}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# add include directory to target}
+\DoxyCodeLine{target\_include\_directories(miluphcdua PUBLIC include) \#PUBLIC/PRIVATE/INTERFACE}
+\DoxyCodeLine{\# add compile feature to target}
+\DoxyCodeLine{target\_compile\_features(miluphcuda PUBLIC cxx\_std\_11)}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# chain targets (assume "{}another"{} is a target)}
+\DoxyCodeLine{add\_library(another STATIC another.cpp another.h)}
+\DoxyCodeLine{target\_link\_libraries(another PUBLIC miluphcuda)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md21}{}\doxysubsection{P\+R\+O\+G\+R\+A\+M\+M\+I\+N\+G I\+N C\+M\+A\+KE}\label{md_documents__c_make_introduction_autotoc_md21}
+Keywords\+:
+
+
+\begin{DoxyItemize}
+\item N\+OT
+\item T\+A\+R\+G\+ET
+\item E\+X\+I\+S\+TS
+\item D\+E\+F\+I\+N\+ED
+\item S\+T\+R\+E\+Q\+U\+AL
+\item A\+ND
+\item OR
+\item M\+A\+T\+C\+H\+ES
+\item ...
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md22}{}\doxysubsubsection{Control flow}\label{md_documents__c_make_introduction_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{if(variable)}
+\DoxyCodeLine{    \# If variable is `ON`, `YES`, `TRUE`, `Y`, or non zero number}
+\DoxyCodeLine{else()}
+\DoxyCodeLine{    \# If variable is `0`, `OFF`, `NO`, `FALSE`, `N`, `IGNORE`, `NOTFOUND`, `"{}"{}`, or ends in `-\/NOTFOUND`}
+\DoxyCodeLine{\#endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md23}{}\doxysubsubsection{Loops}\label{md_documents__c_make_introduction_autotoc_md23}
+
+\begin{DoxyItemize}
+\item {\ttfamily foreach(var I\+N I\+T\+E\+M\+S foo bar baz) ...}
+\item {\ttfamily foreach(var I\+N L\+I\+S\+T\+S my\+\_\+list) ...}
+\item \`{}{\ttfamily foreach(var I\+N L\+I\+S\+T\+S my\+\_\+list I\+T\+E\+M\+S foo bar baz) ...}
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md24}{}\doxysubsubsection{Generator expression}\label{md_documents__c_make_introduction_autotoc_md24}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_include\_directories(}
+\DoxyCodeLine{        MyTarget}
+\DoxyCodeLine{        PUBLIC}
+\DoxyCodeLine{        \$<BUILD\_INTERFACE:\$\{CMAKE\_CURRENT\_SOURCE\_DIR\}/include>}
+\DoxyCodeLine{        \$<INSTALL\_INTERFACE:include>}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md25}{}\doxysubsubsection{Functions (\& macros)}\label{md_documents__c_make_introduction_autotoc_md25}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{function(SIMPLE REQUIRED\_ARG)}
+\DoxyCodeLine{    message(STATUS "{}Simple arguments: \$\{REQUIRED\_ARG\}, followed by \$\{ARGV\}"{})}
+\DoxyCodeLine{    set(\$\{REQUIRED\_ARG\} "{}From SIMPLE"{} PARENT\_SCOPE)}
+\DoxyCodeLine{endfunction()}
+\DoxyCodeLine{simple(This)}
+\DoxyCodeLine{message("{}Output: \$\{This\}"{})}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md26}{}\doxysubsection{C\+O\+M\+M\+U\+N\+I\+C\+A\+T\+I\+O\+N W\+I\+T\+H C\+O\+DE}\label{md_documents__c_make_introduction_autotoc_md26}
+\hypertarget{md_documents__c_make_introduction_autotoc_md27}{}\doxysubsubsection{Configure File}\label{md_documents__c_make_introduction_autotoc_md27}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{configure\_file()}
+\DoxyCodeLine{...}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md28}{}\doxysubsubsection{Reading files}\label{md_documents__c_make_introduction_autotoc_md28}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{...}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md29}{}\doxysubsection{R\+U\+N\+N\+I\+N\+G O\+T\+H\+E\+R P\+R\+O\+G\+R\+A\+MS}\label{md_documents__c_make_introduction_autotoc_md29}
+\hypertarget{md_documents__c_make_introduction_autotoc_md30}{}\doxysubsubsection{command at configure time}\label{md_documents__c_make_introduction_autotoc_md30}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(Git QUIET)}
+\DoxyCodeLine{if(GIT\_FOUND AND EXISTS "{}\$\{PROJECT\_SOURCE\_DIR\}/.git"{})}
+\DoxyCodeLine{    execute\_process(COMMAND \$\{GIT\_EXECUTABLE\} submodule update -\/-\/init -\/-\/recursive}
+\DoxyCodeLine{            WORKING\_DIRECTORY \$\{CMAKE\_CURRENT\_SOURCE\_DIR\}}
+\DoxyCodeLine{            RESULT\_VARIABLE GIT\_SUBMOD\_RESULT)}
+\DoxyCodeLine{    if(NOT GIT\_SUBMOD\_RESULT EQUAL "{}0"{})}
+\DoxyCodeLine{        message(FATAL\_ERROR "{}git submodule update -\/-\/init failed with \$\{GIT\_SUBMOD\_RESULT\}, please checkout submodules"{})}
+\DoxyCodeLine{    endif()}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md31}{}\doxysubsubsection{command at build time}\label{md_documents__c_make_introduction_autotoc_md31}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(PythonInterp REQUIRED)}
+\DoxyCodeLine{add\_custom\_command(OUTPUT "{}\$\{CMAKE\_CURRENT\_BINARY\_DIR\}/include/Generated.hpp"{}}
+\DoxyCodeLine{        COMMAND "{}\$\{PYTHON\_EXECUTABLE\}"{} "{}\$\{CMAKE\_CURRENT\_SOURCE\_DIR\}/scripts/GenerateHeader.py"{} -\/-\/argument}
+\DoxyCodeLine{        DEPENDS some\_target)}
+\DoxyCodeLine{add\_custom\_target(generate\_header ALL}
+\DoxyCodeLine{        DEPENDS "{}\$\{CMAKE\_CURRENT\_BINARY\_DIR\}/include/Generated.hpp"{})}
+\DoxyCodeLine{install(FILES \$\{CMAKE\_CURRENT\_BINARY\_DIR\}/include/Generated.hpp DESTINATION include)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md32}{}\doxysection{Libraries}\label{md_documents__c_make_introduction_autotoc_md32}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# make a library}
+\DoxyCodeLine{add\_library(one STATIC two.cpp three.h) \# STATIC/SHARED/MODULE}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md33}{}\doxysection{Language/\+Package related}\label{md_documents__c_make_introduction_autotoc_md33}
+\hypertarget{md_documents__c_make_introduction_autotoc_md34}{}\doxysubsection{C}\label{md_documents__c_make_introduction_autotoc_md34}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# set C compiler}
+\DoxyCodeLine{set(CMAKE\_C\_COMPILER "{}/usr/bin/gcc-\/7"{})}
+\DoxyCodeLine{execute\_process (}
+\DoxyCodeLine{        COMMAND bash -\/c "{}git describe -\/-\/abbrev=4 -\/-\/dirty -\/-\/always -\/-\/tags'"{}}
+\DoxyCodeLine{        OUTPUT\_VARIABLE GIT\_VERSION}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#set(CMAKE\_BUILD\_TYPE DEBUG)}
+\DoxyCodeLine{set(CMAKE\_C\_FLAGS "{}-\/c -\/std=c99 -\/O3 -\/DVERSION=\(\backslash\)"{}\$\{GIT\_VERSION\})\(\backslash\)"{} -\/fPIC"{})}
+\DoxyCodeLine{\#set(CMAKE\_C\_FLAGS\_DEBUG "{}-\/O0 -\/ggdb"{})}
+\DoxyCodeLine{\#set(CMAKE\_C\_FLAGS\_RELEASE "{}-\/O0 -\/ggdb"{})}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md35}{}\doxysubsection{C++}\label{md_documents__c_make_introduction_autotoc_md35}
+...\hypertarget{md_documents__c_make_introduction_autotoc_md36}{}\doxysubsection{C\+U\+DA}\label{md_documents__c_make_introduction_autotoc_md36}
+See \href{https://on-demand.gputechconf.com/gtc/2017/presentation/S7438-robert-maynard-build-systems-combining-cuda-and-machine-learning.pdf}{\texttt{ Combining C\+U\+DA and Modern C\+Make}}\hypertarget{md_documents__c_make_introduction_autotoc_md37}{}\doxysubsubsection{Enable Cuda support}\label{md_documents__c_make_introduction_autotoc_md37}
+C\+U\+DA is not optional
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{project(MY\_PROJECT LANGUAGES CUDA CXX)}
+\end{DoxyCode}
+
+
+C\+U\+DA is optional
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{enable\_language(CUDA)}
+\end{DoxyCode}
+
+
+Check whether C\+U\+DA is available
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include(CheckLanguage)}
+\DoxyCodeLine{check\_language(CUDA)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md38}{}\doxysubsubsection{C\+U\+D\+A Variables}\label{md_documents__c_make_introduction_autotoc_md38}
+Exchange {\itshape C\+XX} with {\itshape C\+U\+DA}
+
+E.\+g. setting C\+U\+DA standard\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{if(NOT DEFINED CMAKE\_CUDA\_STANDARD)}
+\DoxyCodeLine{    set(CMAKE\_CUDA\_STANDARD 11)}
+\DoxyCodeLine{    set(CMAKE\_CUDA\_STANDARD\_REQUIRED ON)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md39}{}\doxysubsubsection{Adding libraries / executables}\label{md_documents__c_make_introduction_autotoc_md39}
+As long as $\ast$.cu$\ast$ is used for C\+U\+DA files, the procedure is as normal.
+
+With separable compilation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set\_target\_properties(mylib PROPERTIES}
+\DoxyCodeLine{                            CUDA\_SEPARABLE\_COMPILATION ON)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md40}{}\doxysubsubsection{Architecture}\label{md_documents__c_make_introduction_autotoc_md40}
+Use {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+U\+D\+A\+\_\+\+A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES} variable and the {\ttfamily C\+U\+D\+A\+\_\+\+A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES property} on targets.\hypertarget{md_documents__c_make_introduction_autotoc_md41}{}\doxysubsubsection{Working with targets}\label{md_documents__c_make_introduction_autotoc_md41}
+Compiler option
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{"{}\$<\$<BUILD\_INTERFACE:\$<COMPILE\_LANGUAGE:CXX>>:-\/fopenmp>\$<\$<BUILD\_INTERFACE:\$<COMPILE\_LANGUAGE:CUDA>>:-\/Xcompiler=-\/fopenmp>"{}}
+\end{DoxyCode}
+
+
+Use a function that will fix a C++ only target by wrapping the flags if using a C\+U\+DA compiler
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{function(CUDA\_CONVERT\_FLAGS EXISTING\_TARGET)}
+\DoxyCodeLine{    get\_property(old\_flags TARGET \$\{EXISTING\_TARGET\} PROPERTY INTERFACE\_COMPILE\_OPTIONS)}
+\DoxyCodeLine{    if(NOT "{}\$\{old\_flags\}"{} STREQUAL "{}"{})}
+\DoxyCodeLine{        string(REPLACE "{};"{} "{},"{} CUDA\_flags "{}\$\{old\_flags\}"{})}
+\DoxyCodeLine{        set\_property(TARGET \$\{EXISTING\_TARGET\} PROPERTY INTERFACE\_COMPILE\_OPTIONS}
+\DoxyCodeLine{            "{}\$<\$<BUILD\_INTERFACE:\$<COMPILE\_LANGUAGE:CXX>>:\$\{old\_flags\}>\$<\$<BUILD\_INTERFACE:\$<COMPILE\_LANGUAGE:CUDA>>:-\/Xcompiler=\$\{CUDA\_flags\}>"{}}
+\DoxyCodeLine{            )}
+\DoxyCodeLine{    endif()}
+\DoxyCodeLine{endfunction()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md42}{}\doxysubsubsection{Useful variables}\label{md_documents__c_make_introduction_autotoc_md42}
+
+\begin{DoxyItemize}
+\item {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+U\+D\+A\+\_\+\+T\+O\+O\+L\+K\+I\+T\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+I\+ES}\+: Place for built-\/in Thrust, etc
+\item {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+U\+D\+A\+\_\+\+C\+O\+M\+P\+I\+L\+ER}\+: N\+V\+CC with location
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(CUDA\_DIR "{}/usr/local/cuda-\/10.0"{})}
+\DoxyCodeLine{set(CMAKE\_CUDA\_COMPILER \$\{CUDA\_DIR\}/bin/nvcc)}
+\DoxyCodeLine{set(CMAKE\_CUDA\_FLAGS "{}-\/ccbin \$\{CC\} -\/x cu -\/c -\/dc -\/O3  -\/Xcompiler "{}-\/O3 -\/pthread"{} -\/Wno-\/deprecated-\/gpu-\/targets -\/DVERSION=\(\backslash\)"{}\$\{GIT\_VERSION\}\(\backslash\)"{}  -\/-\/ptxas-\/options=-\/v"{})}
+\DoxyCodeLine{set(CMAKE\_CUDA\_FLAGS\_DEBUG ...)}
+\DoxyCodeLine{set(CMAKE\_CUDA\_HOST\_COMPILER ...)}
+\DoxyCodeLine{set(CMAKE\_CUDA\_EXTENSIONS ...)}
+\DoxyCodeLine{set(CMAKE\_CUDA\_STANDARD ...)}
+\DoxyCodeLine{set(CMAKE\_CUDA\_RUNTIME\_LIBRARY ...)}
+\DoxyCodeLine{...}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md43}{}\doxysubsection{Open\+MP}\label{md_documents__c_make_introduction_autotoc_md43}
+\hypertarget{md_documents__c_make_introduction_autotoc_md44}{}\doxysubsubsection{Enable Open\+M\+P support}\label{md_documents__c_make_introduction_autotoc_md44}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(OpenMP)}
+\DoxyCodeLine{if(OpenMP\_CXX\_FOUND)}
+\DoxyCodeLine{    target\_link\_libraries(MyTarget PUBLIC OpenMP::OpenMP\_CXX)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md45}{}\doxysubsection{Boost}\label{md_documents__c_make_introduction_autotoc_md45}
+The Boost library is included in the find packages that C\+Make provides.
+
+(Common) Settings related to boost
+
+
+\begin{DoxyItemize}
+\item {\ttfamily set(\+Boost\+\_\+\+U\+S\+E\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+L\+I\+B\+S O\+F\+F)}
+\item {\ttfamily set(\+Boost\+\_\+\+U\+S\+E\+\_\+\+M\+U\+L\+T\+I\+T\+H\+R\+E\+A\+D\+E\+D O\+N)}
+\item \`{}{\ttfamily set(\+Boost\+\_\+\+U\+S\+E\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+R\+U\+N\+T\+I\+M\+E O\+F\+F)}
+\end{DoxyItemize}
+
+E.\+g.\+: using the {\ttfamily Boost\+::filesystem} library
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(Boost\_USE\_STATIC\_LIBS OFF)}
+\DoxyCodeLine{set(Boost\_USE\_MULTITHREADED ON)}
+\DoxyCodeLine{set(Boost\_USE\_STATIC\_RUNTIME OFF)}
+\DoxyCodeLine{find\_package(Boost 1.50 REQUIRED COMPONENTS filesystem)}
+\DoxyCodeLine{message(STATUS "{}Boost version: \$\{Boost\_VERSION\}"{})}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# This is needed if your Boost version is newer than your CMake version}
+\DoxyCodeLine{\# or if you have an old version of CMake (<3.5)}
+\DoxyCodeLine{if(NOT TARGET Boost::filesystem)}
+\DoxyCodeLine{    add\_library(Boost::filesystem IMPORTED INTERFACE)}
+\DoxyCodeLine{    set\_property(TARGET Boost::filesystem PROPERTY}
+\DoxyCodeLine{        INTERFACE\_INCLUDE\_DIRECTORIES \$\{Boost\_INCLUDE\_DIR\})}
+\DoxyCodeLine{    set\_property(TARGET Boost::filesystem PROPERTY}
+\DoxyCodeLine{        INTERFACE\_LINK\_LIBRARIES \$\{Boost\_LIBRARIES\})}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md46}{}\doxysubsection{M\+PI}\label{md_documents__c_make_introduction_autotoc_md46}
+\hypertarget{md_documents__c_make_introduction_autotoc_md47}{}\doxysubsubsection{Enable M\+P\+I support}\label{md_documents__c_make_introduction_autotoc_md47}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(MPI REQUIRED)}
+\DoxyCodeLine{message(STATUS "{}Run: \$\{MPIEXEC\} \$\{MPIEXEC\_NUMPROC\_FLAG\} \$\{MPIEXEC\_MAX\_NUMPROCS\} \$\{MPIEXEC\_PREFLAGS\} EXECUTABLE \$\{MPIEXEC\_POSTFLAGS\} ARGS"{})}
+\DoxyCodeLine{target\_link\_libraries(MyTarget PUBLIC MPI::MPI\_CXX)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md48}{}\doxysection{Adding features}\label{md_documents__c_make_introduction_autotoc_md48}
+\hypertarget{md_documents__c_make_introduction_autotoc_md49}{}\doxysubsection{Set default build type}\label{md_documents__c_make_introduction_autotoc_md49}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(default\_build\_type "{}Release"{})}
+\DoxyCodeLine{if(NOT CMAKE\_BUILD\_TYPE AND NOT CMAKE\_CONFIGURATION\_TYPES)}
+\DoxyCodeLine{  message(STATUS "{}Setting build type to '\$\{default\_build\_type\}' as none was specified."{})}
+\DoxyCodeLine{  set(CMAKE\_BUILD\_TYPE "{}\$\{default\_build\_type\}"{} CACHE}
+\DoxyCodeLine{      STRING "{}Choose the type of build."{} FORCE)}
+\DoxyCodeLine{  \# Set the possible values of build type for cmake-\/gui}
+\DoxyCodeLine{  set\_property(CACHE CMAKE\_BUILD\_TYPE PROPERTY STRINGS}
+\DoxyCodeLine{    "{}Debug"{} "{}Release"{} "{}MinSizeRel"{} "{}RelWithDebInfo"{})}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md50}{}\doxysubsection{Meta compiler features}\label{md_documents__c_make_introduction_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_compile\_features(myTarget PUBLIC cxx\_std\_11)}
+\DoxyCodeLine{set\_target\_properties(myTarget PROPERTIES CXX\_EXTENSIONS OFF)}
+\DoxyCodeLine{set(CMAKE\_CXX\_STANDARD 11)}
+\DoxyCodeLine{set(CMAKE\_CXX\_STANDARD\_REQUIRED ON)}
+\DoxyCodeLine{set(CMAKE\_CXX\_EXTENSIONS OFF)}
+\DoxyCodeLine{set\_target\_properties(myTarget PROPERTIES}
+\DoxyCodeLine{    CXX\_STANDARD 11}
+\DoxyCodeLine{    CXX\_STANDARD\_REQUIRED YES}
+\DoxyCodeLine{    CXX\_EXTENSIONS NO}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md51}{}\doxysubsection{Position independent code (-\/f\+P\+I\+C)}\label{md_documents__c_make_introduction_autotoc_md51}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(CMAKE\_POSITION\_INDEPENDENT\_CODE ON)}
+\DoxyCodeLine{\# or target dependent}
+\DoxyCodeLine{set\_target\_properties(lib1 PROPERTIES POSITION\_INDEPENDENT\_CODE ON)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md52}{}\doxysubsection{Little libraries}\label{md_documents__c_make_introduction_autotoc_md52}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_library(MATH\_LIBRARY m)}
+\DoxyCodeLine{if(MATH\_LIBRARY)}
+\DoxyCodeLine{    target\_link\_libraries(MyTarget PUBLIC \$\{MATH\_LIBRARY\})}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md53}{}\doxysubsection{Modules}\label{md_documents__c_make_introduction_autotoc_md53}
+\hypertarget{md_documents__c_make_introduction_autotoc_md54}{}\doxysubsubsection{C\+Make\+Dependent\+Option}\label{md_documents__c_make_introduction_autotoc_md54}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include(CMakeDependentOption)}
+\DoxyCodeLine{cmake\_dependent\_option(BUILD\_TESTS "{}Build your tests"{} ON "{}VAL1;VAL2"{} OFF)}
+\end{DoxyCode}
+
+
+which is equivalent to
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{if(VAL1 AND VAL2)}
+\DoxyCodeLine{    set(BUILD\_TESTS\_DEFAULT ON)}
+\DoxyCodeLine{else()}
+\DoxyCodeLine{    set(BUILD\_TESTS\_DEFAULT OFF)}
+\DoxyCodeLine{endif()}
+\DoxyCodeLine{}
+\DoxyCodeLine{option(BUILD\_TESTS "{}Build your tests"{} \$\{BUILD\_TESTS\_DEFAULT\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{if(NOT BUILD\_TESTS\_DEFAULT)}
+\DoxyCodeLine{    mark\_as\_advanced(BUILD\_TESTS)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md55}{}\doxysubsubsection{C\+Make\+Print\+Helpers}\label{md_documents__c_make_introduction_autotoc_md55}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\_print\_properties}
+\DoxyCodeLine{cmake\_print\_variables}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md56}{}\doxysubsubsection{Check\+C\+X\+X\+Compiler\+Flag}\label{md_documents__c_make_introduction_autotoc_md56}
+Check whether flag is supported
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include(CheckCXXCompilerFlag)}
+\DoxyCodeLine{check\_cxx\_compiler\_flag(-\/someflag OUTPUT\_VARIABLE)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md57}{}\doxysubsubsection{Write\+Compiler\+Detection\+Header}\label{md_documents__c_make_introduction_autotoc_md57}
+Look for a list of features that some compilers support and write out a C++ header file that lets you know whether that feature is available
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{write\_compiler\_detection\_header(}
+\DoxyCodeLine{  FILE myoutput.h}
+\DoxyCodeLine{  PREFIX My}
+\DoxyCodeLine{  COMPILERS GNU Clang MSVC Intel}
+\DoxyCodeLine{  FEATURES cxx\_variadic\_templates}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md58}{}\doxysubsubsection{try\+\_\+compile / try\+\_\+run}\label{md_documents__c_make_introduction_autotoc_md58}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{try\_compile(}
+\DoxyCodeLine{  RESULT\_VAR}
+\DoxyCodeLine{    bindir}
+\DoxyCodeLine{  SOURCES}
+\DoxyCodeLine{    source.cpp}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md59}{}\doxysection{Debugging}\label{md_documents__c_make_introduction_autotoc_md59}
+\hypertarget{md_documents__c_make_introduction_autotoc_md60}{}\doxysubsection{Printing variables}\label{md_documents__c_make_introduction_autotoc_md60}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{message(STATUS "{}MY\_VARIABLE=\$\{MY\_VARIABLE\}"{})}
+\DoxyCodeLine{\# or using module }
+\DoxyCodeLine{include(CMakePrintHelpers)}
+\DoxyCodeLine{cmake\_print\_variables(MY\_VARIABLE)}
+\DoxyCodeLine{cmake\_print\_properties(}
+\DoxyCodeLine{    TARGETS my\_target}
+\DoxyCodeLine{    PROPERTIES POSITION\_INDEPENDENT\_CODE}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md61}{}\doxysubsection{Tracing a run}\label{md_documents__c_make_introduction_autotoc_md61}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake -\/S . -\/B build -\/-\/trace-\/source=CMakeLists.txt \#-\/-\/trace-\/expand }
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md62}{}\doxysection{Including projects}\label{md_documents__c_make_introduction_autotoc_md62}
+\hypertarget{md_documents__c_make_introduction_autotoc_md63}{}\doxysubsection{Fetch}\label{md_documents__c_make_introduction_autotoc_md63}
+E.\+g.\+: download Catch2
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FetchContent\_Declare(}
+\DoxyCodeLine{  catch}
+\DoxyCodeLine{  GIT\_REPOSITORY https://github.com/catchorg/Catch2.git}
+\DoxyCodeLine{  GIT\_TAG        v2.13.0}
+\DoxyCodeLine{)}
+\DoxyCodeLine{\# CMake 3.14+}
+\DoxyCodeLine{FetchContent\_MakeAvailable(catch)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md64}{}\doxysection{Testing}\label{md_documents__c_make_introduction_autotoc_md64}
+\hypertarget{md_documents__c_make_introduction_autotoc_md65}{}\doxysubsection{General}\label{md_documents__c_make_introduction_autotoc_md65}
+Enable testing and set a {\ttfamily B\+U\+I\+L\+D\+\_\+\+T\+E\+S\+T\+I\+NG} option
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{if(CMAKE\_PROJECT\_NAME STREQUAL PROJECT\_NAME)}
+\DoxyCodeLine{    include(CTest)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+
+
+Add test folder
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{if(CMAKE\_PROJECT\_NAME STREQUAL PROJECT\_NAME AND BUILD\_TESTING)}
+\DoxyCodeLine{    add\_subdirectory(tests)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+
+
+Register targets
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_test(NAME TestName COMMAND TargetName)}
+\DoxyCodeLine{add\_test(NAME TestName COMMAND \$<TARGET\_FILE:\$\{TESTNAME\}>)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md66}{}\doxysubsection{Building as part of the test}\label{md_documents__c_make_introduction_autotoc_md66}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_test(}
+\DoxyCodeLine{  NAME}
+\DoxyCodeLine{    ExampleCMakeBuild}
+\DoxyCodeLine{  COMMAND}
+\DoxyCodeLine{    "{}\$\{CMAKE\_CTEST\_COMMAND\}"{}}
+\DoxyCodeLine{             -\/-\/build-\/and-\/test "{}\$\{My\_SOURCE\_DIR\}/examples/simple"{}}
+\DoxyCodeLine{                              "{}\$\{CMAKE\_CURRENT\_BINARY\_DIR\}/simple"{}}
+\DoxyCodeLine{             -\/-\/build-\/generator "{}\$\{CMAKE\_GENERATOR\}"{}}
+\DoxyCodeLine{             -\/-\/test-\/command "{}\$\{CMAKE\_CTEST\_COMMAND\}"{}}
+\DoxyCodeLine{)}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md67}{}\doxysubsection{Testing frameworks}\label{md_documents__c_make_introduction_autotoc_md67}
+\hypertarget{md_documents__c_make_introduction_autotoc_md68}{}\doxysubsubsection{Google\+Test}\label{md_documents__c_make_introduction_autotoc_md68}
+See \href{https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html}{\texttt{ Modern C\+Make\+: Google\+Test}} for reference.
+
+Checkout Google\+Test as submodule
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git submodule add -\/-\/branch=release-\/1.8.0 ../../google/googletest.git extern/googletest}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{option(PACKAGE\_TESTS "{}Build the tests"{} ON)}
+\DoxyCodeLine{if(PACKAGE\_TESTS)}
+\DoxyCodeLine{    enable\_testing()}
+\DoxyCodeLine{    include(GoogleTest)}
+\DoxyCodeLine{    add\_subdirectory(tests)}
+\DoxyCodeLine{endif()}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md69}{}\doxysubsubsection{Catch2}\label{md_documents__c_make_introduction_autotoc_md69}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Prepare "{}Catch"{} library for other executables}
+\DoxyCodeLine{set(CATCH\_INCLUDE\_DIR \$\{CMAKE\_CURRENT\_SOURCE\_DIR\}/extern/catch)}
+\DoxyCodeLine{add\_library(Catch2::Catch IMPORTED INTERFACE)}
+\DoxyCodeLine{set\_property(Catch2::Catch PROPERTY INTERFACE\_INCLUDE\_DIRECTORIES "{}\$\{CATCH\_INCLUDE\_DIR\}"{})}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md70}{}\doxysubsubsection{Doc\+Test}\label{md_documents__c_make_introduction_autotoc_md70}
+{\itshape Doc\+Test} is a replacement for {\itshape Catch2} that is supposed to compile much faster and be cleaner. Just replace {\itshape Catch2} with {\itshape Doc\+Test}.\hypertarget{md_documents__c_make_introduction_autotoc_md71}{}\doxysection{Exporting and Installing}\label{md_documents__c_make_introduction_autotoc_md71}
+Allow others to use your library, via
+
+
+\begin{DoxyItemize}
+\item {\itshape Bad way\+:} Find module
+\item {\itshape Add subproject\+:} {\ttfamily add\+\_\+library(\+My\+Lib\+::\+My\+Lib A\+L\+I\+A\+S My\+Lib)}
+\item {\itshape Exporting\+:} Using $\ast$\+Config.cmake scripts
+\end{DoxyItemize}\hypertarget{md_documents__c_make_introduction_autotoc_md72}{}\doxysubsection{Installing}\label{md_documents__c_make_introduction_autotoc_md72}
+See \href{https://cliutils.gitlab.io/modern-cmake/chapters/install/installing.html}{\texttt{ Git\+Book\+: Installing}} Basic target install command (executed by e.\+g. {\ttfamily make install})
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{install(TARGETS MyLib}
+\DoxyCodeLine{        EXPORT MyLibTargets}
+\DoxyCodeLine{        LIBRARY DESTINATION lib}
+\DoxyCodeLine{        ARCHIVE DESTINATION lib}
+\DoxyCodeLine{        RUNTIME DESTINATION bin}
+\DoxyCodeLine{        INCLUDES DESTINATION include}
+\DoxyCodeLine{        )}
+\end{DoxyCode}
+\hypertarget{md_documents__c_make_introduction_autotoc_md73}{}\doxysubsection{Exporting}\label{md_documents__c_make_introduction_autotoc_md73}
+See \href{https://cliutils.gitlab.io/modern-cmake/chapters/install/exporting.html}{\texttt{ Git\+Book\+: Exporting}}\hypertarget{md_documents__c_make_introduction_autotoc_md74}{}\doxysubsection{Packaging}\label{md_documents__c_make_introduction_autotoc_md74}
+See \href{https://cliutils.gitlab.io/modern-cmake/chapters/install/packaging.html}{\texttt{ Git\+Book\+: Packaging}} 
