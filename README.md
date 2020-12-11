@@ -1,10 +1,14 @@
 # BasicSPH
 
+Adapted from:
+* [Implementing SPH in 2D](https://lucasschuermann.com/writing/implementing-sph-in-2d)
+* [mueller-sph](https://github.com/cerrno/mueller-sph)
+
 **BasicSPH** is a basic implementation of Smoothed Particle Hydrodynamics (SPH).
 
 ## SPH
 
-See [SPH introduction](documents/SPH_intro.pdf)as reference.<sup>[1](#sph_intro_footnote)</sup>
+See [SPH introduction](documents/SPH_intro.pdf) as reference.<sup>[1](#sph_intro_footnote)</sup>
 
 [SPH](https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics) is a computational method for solving partial differential equations ([PDEs](https://en.wikipedia.org/wiki/Partial_differential_equation)). It's a meshfree Lagrangian method, which makes it ideal to simulate problems dominated by complex boundary dynamics. 
 

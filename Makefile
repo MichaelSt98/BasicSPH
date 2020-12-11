@@ -20,9 +20,10 @@ DEPEXT      := d
 OBJEXT      := o
 
 #Flags, Libraries and Includes
-CXXFLAGS    := -Xpreprocessor -fopenmp #-lomp -Wall #-fopenmp -Wall -O3 -g
-LIB         := #-fopenmp -lm -larmadillo
-INC         := -I$(INCDIR) -I/usr/local/include
+CXXFLAGS    := -std=c++17 -O3 -Wall -pedantic -Wno-vla-extension -I/usr/local/include/ -I/usr/local/include/eigen3/ -I./include -I./src
+LFLAGS      := -std=c++17 -O3 -Wall -Wno-deprecated -Werror -pedantic -L/usr/local/lib/
+LIB         := -framework OpenGL -framework GLUT
+INC         := -I$(INCDIR) -I/usr/local/include -I/usr/include/opengl -I./include -DNDEBUG
 INCDEP      := -I$(INCDIR)
 
 #Source and Object files
@@ -64,7 +65,7 @@ cleaner: clean
 
 #link
 $(TARGET): $(OBJECTS)
-	$(CXX) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+	$(CXX) $(LFLAGS) $(INC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
 #compile
 $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
