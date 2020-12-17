@@ -1,15 +1,12 @@
-#if __APPLE__
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
 #include <iostream>
 #include <vector>
 #include <eigen3/Eigen/Dense>
 
+#include "../include/matplotlibcpp.h"
 #include "../include/Particle.h"
 #include "../include/Settings.h"
+
+namespace plt = matplotlibcpp;
 
 
 static ParticleHandler particle_handler;
@@ -93,78 +90,55 @@ void ComputeForces(void)
 	}
 }
 
-void Update(void)
-{
-	ComputeDensityPressure();
-	ComputeForces();
-	Integrate();
 
-	glutPostRedisplay();
+void update() {
+    //std::cout << "updating" << std::endl;
+    //particle_handler.print_particles();
+    ComputeDensityPressure();
+    ComputeForces();
+    Integrate();
 }
 
-void InitGL(void)
-{
-	glClearColor(0.9f, 0.9f, 0.9f, 1);
-	glEnable(GL_POINT_SMOOTH);
-	glPointSize(H / 2.f);
-	glMatrixMode(GL_PROJECTION);
-}
-
-void Render(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glLoadIdentity();
-	glOrtho(0, VIEW_WIDTH, 0, VIEW_HEIGHT, 0, 1);
-
-	glColor4f(0.2f, 0.6f, 1.0f, 1);
-	glBegin(GL_POINTS);
-	for (auto &p : particle_handler.particles)
-		glVertex2f(p.x(0), p.x(1));
-	glEnd();
-
-	glutSwapBuffers();
-}
-
-void Keyboard(unsigned char c, __attribute__((unused)) int x, __attribute__((unused)) int y)
-{
-	switch (c)
-	{
-	case ' ':
-		if (particle_handler.particles.size() >= MAX_PARTICLES)
-			std::cout << "maximum number of particles reached" << std::endl;
-		else
-		{
-			unsigned int placed = 0;
-			for (float y = VIEW_HEIGHT / 1.5f - VIEW_HEIGHT / 5.f; y < VIEW_HEIGHT / 1.5f + VIEW_HEIGHT / 5.f; y += H * 0.95f)
-				for (float x = VIEW_WIDTH / 2.f - VIEW_HEIGHT / 5.f; x <= VIEW_WIDTH / 2.f + VIEW_HEIGHT / 5.f; x += H * 0.95f)
-					if (placed++ < BLOCK_PARTICLES && particle_handler.particles.size() < MAX_PARTICLES)
-						particle_handler.particles.push_back(Particle(x, y));
-		}
-		break;
-	case 'r':
-	case 'R':
-		particle_handler.particles.clear();
-		particle_handler.init_distribution();
-		break;
-	}
-}
 
 int main(int argc, char **argv)
 {
 
+    //plt::figure(); //causes segmentation fault
+    plt::backend("MacOSX"); //MacOSX, TKAgg, Qt4Agg, Qt4Agg //, cairo
+    plt::ion();
 
+    // Plot line from given x and y data. Color is selected automatically.
+    std::vector<double> x_vec, y_vec;
 
-	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	glutInit(&argc, argv);
-	glutCreateWindow("Müller SPH");
-	glutDisplayFunc(Render);
-	glutIdleFunc(Update);
-	glutKeyboardFunc(Keyboard);
+	for (int i = 0; i < 1000; i++) {
+	    std::cout << "i = " << i << std::endl;
+	    update();
+	    //if (i % 10 == 0) {
+	    if (true) {
+            x_vec.clear();
+            y_vec.clear();
+            for (auto &p : particle_handler.particles)
+            {
+                x_vec.push_back(p.x(0));
+                y_vec.push_back(p.x(1));
+            }
+            plt::clf();
+            plt::xlim(0, 1200);
+            plt::ylim(0, 400);
+            plt::scatter(x_vec, y_vec, 16);
+            plt::show(false);
+            plt::pause(0.001);
+	    }
+	}
 
-	InitGL();
+    //plt::show(true); //block: false ?
+    std::cout << "Hallo" << std::endl;
+	//plt::close();
+	//x_vec.clear();
+	//y_vec.clear();
+    //~x_vec();
+    //~y_vec();
 
-	glutMainLoop();
 	return 0;
 
 }

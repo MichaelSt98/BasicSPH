@@ -28,6 +28,7 @@ public:
     ~ParticleHandler();
 
     void init_distribution();
+    void print_particles();
 };
 
 

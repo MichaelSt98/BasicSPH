@@ -15,7 +15,6 @@ warning: Tag 'PERL_PATH' at line 1549 of file './doc/Doxyfile' has become obsole
 warning: Tag 'MSCGEN_PATH' at line 1570 of file './doc/Doxyfile' has become obsolete.
          To avoid this warning please remove this line from your configuration file or upgrade it using "doxygen -u"
 warning: ignoring unknown tag 'Borderliner' at line 1765, file ./doc/Doxyfile
-/Users/Michi/Desktop/Cpp_template_project/include/ConceptClass.h:4: warning: missing argument after '\class'.
 Doxygen version used: 1.8.20
 Searching for include files...
 Searching for example files...
@@ -25,39 +24,37 @@ Searching for msc files...
 Searching for dia files...
 Searching for files to exclude
 Searching INPUT for files to process...
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/bin
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/build
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/doc
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/docs
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/docs/search
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/documents
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/doxygen-theme
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/ideas
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/include
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/lib
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/resources
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/src
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/test
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/src
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/include
-Searching for files in directory /Users/Michi/Desktop/Cpp_template_project/documents
-Reading formula repository...
+Searching for files in directory /Users/Michi/Desktop/BasicSPH
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/bin
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/build
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/doc
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/documents
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/documents/pictures
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/doxygen-theme
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/include
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/lib
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/obj
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/resources
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/src
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/test
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/src
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/include
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/documents
+Searching for files in directory /Users/Michi/Desktop/BasicSPH/documents/pictures
 Reading and parsing tag files
 Parsing files
-Reading /Users/Michi/Desktop/Cpp_template_project/README.md...
-Reading /Users/Michi/Desktop/Cpp_template_project/documents/CMakeIntroduction.md...
-Reading /Users/Michi/Desktop/Cpp_template_project/documents/Markdown.md...
-Reading /Users/Michi/Desktop/Cpp_template_project/documents/structure.md...
-Reading /Users/Michi/Desktop/Cpp_template_project/documents/Unit-Tests.md...
-Preprocessing /Users/Michi/Desktop/Cpp_template_project/include/ConceptClass.h...
-Parsing file /Users/Michi/Desktop/Cpp_template_project/include/ConceptClass.h...
-Preprocessing /Users/Michi/Desktop/Cpp_template_project/src/ConceptClass.cpp...
-Parsing file /Users/Michi/Desktop/Cpp_template_project/src/ConceptClass.cpp...
-Preprocessing /Users/Michi/Desktop/Cpp_template_project/src/Main.cpp...
-Parsing file /Users/Michi/Desktop/Cpp_template_project/src/Main.cpp...
-Preprocessing /Users/Michi/Desktop/Cpp_template_project/test/tester.cpp...
-Parsing file /Users/Michi/Desktop/Cpp_template_project/test/tester.cpp...
+Reading /Users/Michi/Desktop/BasicSPH/README.md...
+Reading /Users/Michi/Desktop/BasicSPH/documents/Markdown.md...
+Preprocessing /Users/Michi/Desktop/BasicSPH/include/matplotlibcpp.h...
+Parsing file /Users/Michi/Desktop/BasicSPH/include/matplotlibcpp.h...
+Preprocessing /Users/Michi/Desktop/BasicSPH/include/Particle.h...
+Parsing file /Users/Michi/Desktop/BasicSPH/include/Particle.h...
+Preprocessing /Users/Michi/Desktop/BasicSPH/include/Settings.h...
+Parsing file /Users/Michi/Desktop/BasicSPH/include/Settings.h...
+Preprocessing /Users/Michi/Desktop/BasicSPH/src/main.cpp...
+Parsing file /Users/Michi/Desktop/BasicSPH/src/main.cpp...
+Preprocessing /Users/Michi/Desktop/BasicSPH/src/Particle.cpp...
+Parsing file /Users/Michi/Desktop/BasicSPH/src/Particle.cpp...
 Building macro definition list...
 Building group list...
 Building directory list...
@@ -99,8 +96,7 @@ Adding source references...
 Adding xrefitems...
 Sorting member lists...
 Setting anonymous enum type...
-Computing dependencies between directories../Users/Michi/Desktop/Cpp_template_project/documents/Markdown.md:174: warning: explicit link request to 'bugID' could not be resolved
-.
+Computing dependencies between directories...
 Generating citations page...
 Counting members...
 Counting data structures...
@@ -112,37 +108,128 @@ Adding members to index pages...
 Correcting members for VHDL...
 Generating style sheet...
 Generating search indices...
-Generating images for formulas in HTML...
 Generating example documentation...
 Generating file sources...
-Parsing code for file documents/CMakeIntroduction.md...
-Parsing code for file documents/Markdown.md...
-Parsing code for file documents/structure.md...
-Parsing code for file documents/Unit-Tests.md...
-Generating code for file include/ConceptClass.h...
+Parsing code for file doc/Users/Michi/Desktop/BasicSPH/documents/Markdown.md:174: warning: explicit link request to 'bugID' could not be resolved
+uments/Markdown.md...
+Generating code for file include/matplotlibcpp.h...
+Generating code for file include/Particle.h...
+Generating code for file include/Settings.h...
 Parsing code for file README.md...
-Generating code for file src/ConceptClass.cpp...
-Generating code for file src/Main.cpp...
-Generating code for file test/tester.cpp...
+Generating code for file src/main.cpp...
+Generating code for file src/Particle.cpp...
 Generating file documentation...
-Generating docs for file documents/CMakeIntroduction.md...
 Generating docs for file documents/Markdown.md...
-Generating docs for file documents/structure.md...
-Generating docs for file documents/Unit-Tests.md...
-Generating docs for file include/ConceptClass.h...
+Generating docs for file include/matplotlibcpp.h...
+Generating docs for file include/Particle.h...
+Generating docs for file include/Settings.h...
 Generating docs for file README.md...
-Generating docs for file src/ConceptClass.cpp...
-Generating docs for file src/Main.cpp...
-Generating docs for file test/tester.cpp...
+Generating docs for file src/main.cpp...
+Generating call graph for function ComputeForces
+Generating call graph for function main
+Generating call graph for function update
+Generating docs for file src/Particle.cpp...
 Generating page documentation...
-Generating docs for page md_documents_CMakeIntroduction...
 Generating docs for page md_documents_Markdown...
-Generating docs for page md_documents_structure...
-Generating docs for page md_documents_Unit-Tests...
 Generating group documentation...
 Generating class documentation...
-Generating docs for compound ConceptClass...
+Generating docs for compound Particle...
+Generating docs for compound ParticleHandler...
+Generating call graph for function ParticleHandler::ParticleHandler
+Generating call graph for function ParticleHandler::ParticleHandler
 Generating namespace index...
+Generating docs for namespace matplotlibcpp
+Generating call graph for function matplotlibcpp::annotate
+Generating call graph for function matplotlibcpp::arrow
+Generating call graph for function matplotlibcpp::axis
+Generating call graph for function matplotlibcpp::axvline
+Generating call graph for function matplotlibcpp::axvspan
+Generating call graph for function matplotlibcpp::cla
+Generating call graph for function matplotlibcpp::clf
+Generating call graph for function matplotlibcpp::close
+Generating call graph for function matplotlibcpp::draw
+Generating call graph for function matplotlibcpp::fignum_exists
+Generating call graph for function matplotlibcpp::figure
+Generating call graph for function matplotlibcpp::figure_size
+Generating call graph for function matplotlibcpp::fill
+Generating call graph for function matplotlibcpp::fill_between
+Generating call graph for function matplotlibcpp::grid
+Generating call graph for function matplotlibcpp::hist
+Generating call graph for function matplotlibcpp::ion
+Generating call graph for function matplotlibcpp::legend
+Generating call graph for function matplotlibcpp::legend
+Generating call graph for function matplotlibcpp::loglog
+Generating call graph for function matplotlibcpp::margins
+Generating call graph for function matplotlibcpp::margins
+Generating call graph for function matplotlibcpp::named_hist
+Generating call graph for function matplotlibcpp::named_loglog
+Generating call graph for function matplotlibcpp::named_plot
+Generating call graph for function matplotlibcpp::named_plot
+Generating call graph for function matplotlibcpp::named_semilogx
+Generating call graph for function matplotlibcpp::named_semilogy
+Generating call graph for function matplotlibcpp::pause
+Generating call graph for function matplotlibcpp::plot
+Generating call graph for function matplotlibcpp::plot
+Generating call graph for function matplotlibcpp::plot
+Generating call graph for function matplotlibcpp::plot
+Generating call graph for function matplotlibcpp::plot
+Generating call graph for function matplotlibcpp::plot3
+Generating call graph for function matplotlibcpp::plot_surface
+Generating call graph for function matplotlibcpp::save
+Generating call graph for function matplotlibcpp::semilogx
+Generating call graph for function matplotlibcpp::semilogy
+Generating call graph for function matplotlibcpp::show
+Generating call graph for function matplotlibcpp::stem
+Generating call graph for function matplotlibcpp::stem
+Generating call graph for function matplotlibcpp::stem
+Generating call graph for function matplotlibcpp::subplot
+Generating call graph for function matplotlibcpp::subplot2grid
+Generating call graph for function matplotlibcpp::text
+Generating call graph for function matplotlibcpp::tick_params
+Generating call graph for function matplotlibcpp::tight_layout
+Generating call graph for function matplotlibcpp::xkcd
+Generating call graph for function matplotlibcpp::xlim
+Generating call graph for function matplotlibcpp::xlim
+Generating call graph for function matplotlibcpp::xticks
+Generating call graph for function matplotlibcpp::ylim
+Generating call graph for function matplotlibcpp::ylim
+Generating call graph for function matplotlibcpp::yticks
+Generating docs for compound matplotlibcpp::Plot...
+Generating call graph for function matplotlibcpp::Plot::Plot
+Generating call graph for function matplotlibcpp::Plot::clear
+Generating call graph for function matplotlibcpp::Plot::update
+Generating docs for namespace matplotlibcpp::detail
+Generating call graph for function matplotlibcpp::detail::get_listlist
+Generating call graph for function matplotlibcpp::detail::imshow
+Generating docs for compound matplotlibcpp::detail::_interpreter...
+Generating call graph for function matplotlibcpp::detail::_interpreter::_interpreter
+Generating call graph for function matplotlibcpp::detail::_interpreter::get
+Generating call graph for function matplotlibcpp::detail::_interpreter::interkeeper
+Generating call graph for function matplotlibcpp::detail::_interpreter::kill
+Generating docs for compound matplotlibcpp::detail::is_callable...
+Generating docs for compound matplotlibcpp::detail::is_callable_impl...
+Generating docs for compound matplotlibcpp::detail::is_callable_impl< false, T >...
+Generating docs for compound matplotlibcpp::detail::is_callable_impl< true, T >...
+Generating docs for nested compound matplotlibcpp::detail::is_callable_impl< true, T >::Check...
+Generating docs for nested compound matplotlibcpp::detail::is_callable_impl< true, T >::Derived...
+Generating docs for nested compound matplotlibcpp::detail::is_callable_impl< true, T >::Fallback...
+Generating call graph for function matplotlibcpp::detail::is_callable_impl< true, T >::Fallback::operator()
+Generating docs for compound matplotlibcpp::detail::plot_impl...
+Generating docs for compound matplotlibcpp::detail::plot_impl< std::false_type >...
+Generating call graph for function matplotlibcpp::detail::plot_impl< std::false_type >::operator()
+Generating docs for compound matplotlibcpp::detail::plot_impl< std::true_type >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< bool >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< double >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< float >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< int16_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< int32_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< int64_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< int8_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< uint16_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< uint32_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< uint64_t >...
+Generating docs for compound matplotlibcpp::detail::select_npy_type< uint8_t >...
 Generating graph info page...
 Generating directory documentation...
 Generating dependency graph for directory src
@@ -163,5 +250,227 @@ finalizing index lists...
 writing tag file...
 Running plantuml with JAVA...
 Running dot...
-lookup cache used 10/65536 hits=22 misses=10
+Generating dot graphs using 5 parallel threads...
+Running dot for graph 1/192
+Running dot for graph 2/192
+Running dot for graph 3/192
+Running dot for graph 4/192
+Running dot for graph 5/192
+Running dot for graph 6/192
+Running dot for graph 7/192
+Running dot for graph 8/192
+Running dot for graph 9/192
+Running dot for graph 10/192
+Running dot for graph 11/192
+Running dot for graph 12/192
+Running dot for graph 13/192
+Running dot for graph 14/192
+Running dot for graph 15/192
+Running dot for graph 16/192
+Running dot for graph 17/192
+Running dot for graph 18/192
+Running dot for graph 19/192
+Running dot for graph 20/192
+Running dot for graph 21/192
+Running dot for graph 22/192
+Running dot for graph 23/192
+Running dot for graph 24/192
+Running dot for graph 25/192
+Running dot for graph 26/192
+Running dot for graph 27/192
+Running dot for graph 28/192
+Running dot for graph 29/192
+Running dot for graph 30/192
+Running dot for graph 31/192
+Running dot for graph 32/192
+Running dot for graph 33/192
+Running dot for graph 34/192
+Running dot for graph 35/192
+Running dot for graph 36/192
+Running dot for graph 37/192
+Running dot for graph 38/192
+Running dot for graph 39/192
+Running dot for graph 40/192
+Running dot for graph 41/192
+Running dot for graph 42/192
+Running dot for graph 43/192
+Running dot for graph 44/192
+Running dot for graph 45/192
+Running dot for graph 46/192
+Running dot for graph 47/192
+Running dot for graph 48/192
+Running dot for graph 49/192
+Running dot for graph 50/192
+Running dot for graph 51/192
+Running dot for graph 52/192
+Running dot for graph 53/192
+Running dot for graph 54/192
+Running dot for graph 55/192
+Running dot for graph 56/192
+Running dot for graph 57/192
+Running dot for graph 58/192
+Running dot for graph 59/192
+Running dot for graph 60/192
+Running dot for graph 61/192
+Running dot for graph 62/192
+Running dot for graph 63/192
+Running dot for graph 64/192
+Running dot for graph 65/192
+Running dot for graph 66/192
+Running dot for graph 67/192
+Running dot for graph 68/192
+Running dot for graph 69/192
+Running dot for graph 70/192
+Running dot for graph 71/192
+Running dot for graph 72/192
+Running dot for graph 73/192
+Running dot for graph 74/192
+Running dot for graph 75/192
+Running dot for graph 76/192
+Running dot for graph 77/192
+Running dot for graph 78/192
+Running dot for graph 79/192
+Running dot for graph 80/192
+Running dot for graph 81/192
+Running dot for graph 82/192
+Running dot for graph 83/192
+Running dot for graph 84/192
+Running dot for graph 85/192
+Running dot for graph 86/192
+Running dot for graph 87/192
+Running dot for graph 88/192
+Running dot for graph 89/192
+Running dot for graph 90/192
+Running dot for graph 91/192
+Running dot for graph 92/192
+Running dot for graph 93/192
+Running dot for graph 94/192
+Running dot for graph 95/192
+Running dot for graph 96/192
+Running dot for graph 97/192
+Running dot for graph 98/192
+Running dot for graph 99/192
+Running dot for graph 100/192
+Running dot for graph 101/192
+Running dot for graph 102/192
+Running dot for graph 103/192
+Running dot for graph 104/192
+Running dot for graph 105/192
+Running dot for graph 106/192
+Running dot for graph 107/192
+Running dot for graph 108/192
+Running dot for graph 109/192
+Running dot for graph 110/192
+Running dot for graph 111/192
+Running dot for graph 112/192
+Running dot for graph 113/192
+Running dot for graph 114/192
+Running dot for graph 115/192
+Running dot for graph 116/192
+Running dot for graph 117/192
+Running dot for graph 118/192
+Running dot for graph 119/192
+Running dot for graph 120/192
+Running dot for graph 121/192
+Running dot for graph 122/192
+Running dot for graph 123/192
+Running dot for graph 124/192
+Running dot for graph 125/192
+Running dot for graph 126/192
+Running dot for graph 127/192
+Running dot for graph 128/192
+Running dot for graph 129/192
+Running dot for graph 130/192
+Running dot for graph 131/192
+Running dot for graph 132/192
+Running dot for graph 133/192
+Running dot for graph 134/192
+Running dot for graph 135/192
+Running dot for graph 136/192
+Running dot for graph 137/192
+Running dot for graph 138/192
+Running dot for graph 139/192
+Running dot for graph 140/192
+Running dot for graph 141/192
+Running dot for graph 142/192
+Running dot for graph 143/192
+Running dot for graph 144/192
+Running dot for graph 145/192
+Running dot for graph 146/192
+Running dot for graph 147/192
+Running dot for graph 148/192
+Running dot for graph 149/192
+Running dot for graph 150/192
+Running dot for graph 151/192
+Running dot for graph 152/192
+Running dot for graph 153/192
+Running dot for graph 154/192
+Running dot for graph 155/192
+Running dot for graph 156/192
+Running dot for graph 157/192
+Running dot for graph 158/192
+Running dot for graph 159/192
+Running dot for graph 160/192
+Running dot for graph 161/192
+Running dot for graph 162/192
+Running dot for graph 163/192
+Running dot for graph 164/192
+Running dot for graph 165/192
+Running dot for graph 166/192
+Running dot for graph 167/192
+Running dot for graph 168/192
+Running dot for graph 169/192
+Running dot for graph 170/192
+Running dot for graph 171/192
+Running dot for graph 172/192
+Running dot for graph 173/192
+Running dot for graph 174/192
+Running dot for graph 175/192
+Running dot for graph 176/192
+Running dot for graph 177/192
+Running dot for graph 178/192
+Running dot for graph 179/192
+Running dot for graph 180/192
+Running dot for graph 181/192
+Running dot for graph 182/192
+Running dot for graph 183/192
+Running dot for graph 184/192
+Running dot for graph 185/192
+Running dot for graph 186/192
+Running dot for graph 187/192
+Running dot for graph 188/192
+Running dot for graph 189/192
+Running dot for graph 190/192
+Running dot for graph 191/192
+Running dot for graph 192/192
+Patching output file 1/29
+Patching output file 2/29
+Patching output file 3/29
+Patching output file 4/29
+Patching output file 5/29
+Patching output file 6/29
+Patching output file 7/29
+Patching output file 8/29
+Patching output file 9/29
+Patching output file 10/29
+Patching output file 11/29
+Patching output file 12/29
+Patching output file 13/29
+Patching output file 14/29
+Patching output file 15/29
+Patching output file 16/29
+Patching output file 17/29
+Patching output file 18/29
+Patching output file 19/29
+Patching output file 20/29
+Patching output file 21/29
+Patching output file 22/29
+Patching output file 23/29
+Patching output file 24/29
+Patching output file 25/29
+Patching output file 26/29
+Patching output file 27/29
+Patching output file 28/29
+Patching output file 29/29
+lookup cache used 521/65536 hits=3751 misses=524
 finished...

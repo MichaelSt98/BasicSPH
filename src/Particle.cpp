@@ -7,7 +7,7 @@
 
 Particle::Particle(float _x, float _y)  : x(_x, _y), v(0.f, 0.f), f(0.f, 0.f), rho(0), p(0.f)
 {
-    std::cout << "Particle constructor called!" << std::endl;
+    //std::cout << "Particle constructor called!" << std::endl;
 }
 
 void Particle::set_x(float _x, float _y) {
@@ -39,4 +39,11 @@ void ParticleHandler::init_distribution()
                 float jitter = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
                 particles.push_back(Particle(x + jitter, y));
             }
+}
+
+void ParticleHandler::print_particles() {
+    for (auto &p : particles)
+    {
+        std::cout << "x = " << p.x(0) << "  y = " << p.x(1) << std::endl;
+    }
 }

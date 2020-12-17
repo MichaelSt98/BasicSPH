@@ -1,8 +1,14 @@
 #Compiler/Linker
-CXX         := g++
+CXX         := c++
 
 #Target binary
 TARGET      := runner
+
+# default python version
+PYTHON_BIN     ?= python3
+PYTHON_CONFIG  := $(PYTHON_BIN)-config
+PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
+EXTRA_FLAGS    := $(PYTHON_INCLUDE)
 
 #Directories
 SRCDIR      := ./src
@@ -20,11 +26,16 @@ DEPEXT      := d
 OBJEXT      := o
 
 #Flags, Libraries and Includes
-CXXFLAGS    := -std=c++17 -O3 -Wall -pedantic -Wno-vla-extension -I/usr/local/include/ -I/usr/local/include/eigen3/ -I./include -I./src
+CXXFLAGS    +=  -std=c++17 -Wno-conversion -g3 #-std=c++17 -O3 -Wall -pedantic -Wno-vla-extension -I/usr/local/include/ -I/usr/local/include/eigen3/ -I./include -I./src
 LFLAGS      := -std=c++17 -O3 -Wall -Wno-deprecated -Werror -pedantic -L/usr/local/lib/
 LIB         := -framework OpenGL -framework GLUT
 INC         := -I$(INCDIR) -I/usr/local/include -I/usr/include/opengl -I./include -DNDEBUG
 INCDEP      := -I$(INCDIR)
+
+PY_LDFLAGS  += $(shell if $(PYTHON_CONFIG) --ldflags --embed >/dev/null; then $(PYTHON_CONFIG) --ldflags --embed; else $(PYTHON_CONFIG) --ldflags; fi)
+
+EXTRA_FLAGS += $(shell $(PYTHON_BIN) $(CURDIR)/numpy_flags.py)
+WITHOUT_NUMPY := $(findstring $(EXTRA_FLAGS), WITHOUT_NUMPY) 
 
 #Source and Object files
 SOURCES     := $(shell find $(SRCDIR) -type f -name "*.$(SRCEXT)")
@@ -61,17 +72,17 @@ cleaner: clean
 	@$(RM) -rf $(TARGETDIR)
 
 #Pull in dependency info for *existing* .o files
--include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT))
+-include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT)) #$(INCDIR)/matplotlibcpp.h
 
 #link
-$(TARGET): $(OBJECTS)
-	$(CXX) $(LFLAGS) $(INC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+$(TARGET): $(OBJECTS) #$(INCDIR)/matplotlibcpp.h
+	$(CXX) $(LFLAGS) $(PY_LDFLAGS) $(INC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
 #compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) #$(INCDIR)/matplotlibcpp.h
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
-	@$(CXX) $(CXXFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
+	$(CXX) $(CXXFLAGS) $(EXTRA_FLAGS) $(INC) -c -o $@ $< $(PY_LDFLAGS)
+	@$(CXX) $(CXXFLAGS) $(EXTRA_FLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
 	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(BUILDDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(BUILDDIR)/$*.$(DEPEXT)
