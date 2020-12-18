@@ -11,6 +11,8 @@
 #include "../include/Forces.h"
 #include "../include/Timer.h"
 #include "../include/Visualization.h"
+#include "../include/Utils.h"
+#include "../include/Logger.h"
 
 namespace plt = matplotlibcpp;
 
@@ -47,42 +49,46 @@ void update() {
     time_integration.push_back(t_integration.elapsed());
 }
 
-void progress_bar(float progress, int bar_width = 70) {
-    std::cout << "[";
-    int pos = bar_width * progress;
-    for (int i = 0; i < bar_width; ++i) {
-        if (i < pos) std::cout << "=";
-        else if (i == pos) std::cout << ">";
-        else std::cout << " ";
-    }
-    std::cout << "] " << int(progress * 100.0) << " %\r";
-    std::cout.flush();
-}
-
+structlog LOGCFG = {};
 
 int main(int argc, char **argv)
 {
+    //Config: -----(optional)----
+
+    LOGCFG.headers = true;
+    LOGCFG.level = DEBUG;
+    //---------------------------
+    Logger(DEBUG) << "This is a DEBUG message!";
+    Logger(INFO) << "This is a INFO message";
+    Logger(WARN) << "This is a WARNING message";
+    Logger(ERROR) << "This is a ERROR message";
+
     bool visualize = false;
     int no_of_loops = 200;
+
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier green(Color::FG_GREEN);
+    Color::Modifier def(Color::FG_DEFAULT);
 
     std::cout << std::endl << "STARTING BasicSPH... " << std::endl << std::endl;
     Timer t;
 
-
     Visualization visualization{"MacOSX", 16, 0, 1200, 0, 180};
-
 
     // Plot line from given x and y data. Color is selected automatically.
     std::vector<double> x_vec, y_vec;
 
     std::cout << std::endl;
 
-    int bar_width = 70;
+    ProgressBar progress_bar(100);
+
     std::cout << std::endl << "Progress:" << std::endl;
 	for (int i = 0; i <= no_of_loops; i++) {
 
+        std::cout << green;
         float progress = i/(float)no_of_loops;
-        progress_bar(progress, bar_width);
+        progress_bar.show_progress(progress);
+        std::cout << def;
 
 	    update();
 

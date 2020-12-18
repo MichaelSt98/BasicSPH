@@ -262,7 +262,8 @@
   src/../include/Settings.h src/../include/Integrators.h \
   include/Particle.h src/../include/EOS.h include/Settings.h \
   src/../include/Forces.h src/../include/Timer.h \
-  src/../include/Visualization.h include/matplotlibcpp.h
+  src/../include/Visualization.h include/matplotlibcpp.h \
+  src/../include/Utils.h src/../include/Logger.h include/Utils.h
 src/main.cpp:
 /usr/local/include/eigen3/Eigen/Dense:
 /usr/local/include/eigen3/Eigen/Core:
@@ -535,3 +536,6 @@ src/../include/Forces.h:
 src/../include/Timer.h:
 src/../include/Visualization.h:
 include/matplotlibcpp.h:
+src/../include/Utils.h:
+src/../include/Logger.h:
+include/Utils.h:
