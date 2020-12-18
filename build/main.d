@@ -258,7 +258,11 @@
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/numpy/core/include/numpy/_neighborhood_iterator_imp.h \
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/numpy/core/include/numpy/__multiarray_api.h \
   /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/numpy/core/include/numpy/npy_interrupt.h \
-  src/../include/Particle.h src/../include/Settings.h
+  src/../include/Particle.h include/../include/Settings.h \
+  src/../include/Settings.h src/../include/Integrators.h \
+  include/Particle.h src/../include/EOS.h include/Settings.h \
+  src/../include/Forces.h src/../include/Timer.h \
+  src/../include/Visualization.h include/matplotlibcpp.h
 src/main.cpp:
 /usr/local/include/eigen3/Eigen/Dense:
 /usr/local/include/eigen3/Eigen/Core:
@@ -521,4 +525,13 @@ src/../include/matplotlibcpp.h:
 /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/numpy/core/include/numpy/__multiarray_api.h:
 /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/numpy/core/include/numpy/npy_interrupt.h:
 src/../include/Particle.h:
+include/../include/Settings.h:
 src/../include/Settings.h:
+src/../include/Integrators.h:
+include/Particle.h:
+src/../include/EOS.h:
+include/Settings.h:
+src/../include/Forces.h:
+src/../include/Timer.h:
+src/../include/Visualization.h:
+include/matplotlibcpp.h:

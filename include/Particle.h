@@ -5,6 +5,8 @@
 #ifndef BASICSPH_PARTICLE_H
 #define BASICSPH_PARTICLE_H
 
+#include "../include/Settings.h"
+
 #include <iostream>
 #include <vector>
 #include <eigen3/Eigen/Dense>

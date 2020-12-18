@@ -1,120 +1,93 @@
 #include <iostream>
 #include <vector>
 #include <eigen3/Eigen/Dense>
+#include <string>
 
 #include "../include/matplotlibcpp.h"
 #include "../include/Particle.h"
 #include "../include/Settings.h"
+#include "../include/Integrators.h"
+#include "../include/EOS.h"
+#include "../include/Forces.h"
+#include "../include/Timer.h"
+#include "../include/Visualization.h"
 
 namespace plt = matplotlibcpp;
 
-
 static ParticleHandler particle_handler;
+static Integrator integrator{settings::DT, settings::EPS, settings::VIEW_WIDTH,
+                             settings::VIEW_HEIGHT, settings::BOUND_DAMPING};
 
-void Integrate(void)
-{
-	for (auto &p : particle_handler.particles)
-	{
-		// forward Euler integration
-		p.v += DT * p.f / p.rho;
-		p.x += DT * p.v;
+static EOS eos{};
+static Forces forces{};
 
-		// enforce boundary conditions
-		if (p.x(0) - EPS < 0.0f)
-		{
-			p.v(0) *= BOUND_DAMPING;
-			p.x(0) = EPS;
-		}
-		if (p.x(0) + EPS > VIEW_WIDTH)
-		{
-			p.v(0) *= BOUND_DAMPING;
-			p.x(0) = VIEW_WIDTH - EPS;
-		}
-		if (p.x(1) - EPS < 0.0f)
-		{
-			p.v(1) *= BOUND_DAMPING;
-			p.x(1) = EPS;
-		}
-		if (p.x(1) + EPS > VIEW_HEIGHT)
-		{
-			p.v(1) *= BOUND_DAMPING;
-			p.x(1) = VIEW_HEIGHT - EPS;
-		}
-	}
-}
-
-void ComputeDensityPressure(void)
-{
-	for (auto &pi : particle_handler.particles)
-	{
-		pi.rho = 0.f;
-		for (auto &pj : particle_handler.particles)
-		{
-			Eigen::Vector2d rij = pj.x - pi.x;
-			float r2 = rij.squaredNorm();
-
-			if (r2 < HSQ)
-			{
-				// this computation is symmetric
-				pi.rho += MASS * POLY6 * pow(HSQ - r2, 3.f);
-			}
-		}
-		pi.p = GAS_CONST * (pi.rho - REST_DENS);
-	}
-}
-
-void ComputeForces(void)
-{
-	for (auto &pi : particle_handler.particles)
-	{
-		Eigen::Vector2d fpress(0.f, 0.f);
-		Eigen::Vector2d fvisc(0.f, 0.f);
-		for (auto &pj : particle_handler.particles)
-		{
-			if (&pi == &pj)
-				continue;
-
-			Eigen::Vector2d rij = pj.x - pi.x;
-			float r = rij.norm();
-
-			if (r < H)
-			{
-				// compute pressure force contribution
-				fpress += -rij.normalized() * MASS * (pi.p + pj.p) / (2.f * pj.rho) * SPIKY_GRAD * pow(H - r, 2.f);
-				// compute viscosity force contribution
-				fvisc += VISC * MASS * (pj.v - pi.v) / pj.rho * VISC_LAP * (H - r);
-			}
-		}
-		Eigen::Vector2d fgrav = G * pi.rho;
-		pi.f = fpress + fvisc + fgrav;
-	}
-}
-
+static std::vector<double> time_density_pressure;
+static Timer t_density_pressure;
+static std::vector<double> time_forces;
+static Timer t_forces;
+static std::vector<double> time_integration;
+static Timer t_integration;
 
 void update() {
-    //std::cout << "updating" << std::endl;
-    //particle_handler.print_particles();
-    ComputeDensityPressure();
-    ComputeForces();
-    Integrate();
+    //std::cout << "updating..." << std::endl;
+
+    // density pressure
+    t_density_pressure.reset();
+    eos.compute_density_pressure(particle_handler.particles);
+    time_density_pressure.push_back(t_density_pressure.elapsed());
+
+    // forces
+    t_forces.reset();
+    forces.compute_forces(particle_handler.particles);
+    time_forces.push_back(t_forces.elapsed());
+
+    // integration
+    t_integration.reset();
+    integrator.integrate(particle_handler.particles);
+    time_integration.push_back(t_integration.elapsed());
+}
+
+void progress_bar(float progress, int bar_width = 70) {
+    std::cout << "[";
+    int pos = bar_width * progress;
+    for (int i = 0; i < bar_width; ++i) {
+        if (i < pos) std::cout << "=";
+        else if (i == pos) std::cout << ">";
+        else std::cout << " ";
+    }
+    std::cout << "] " << int(progress * 100.0) << " %\r";
+    std::cout.flush();
 }
 
 
 int main(int argc, char **argv)
 {
+    bool visualize = false;
+    int no_of_loops = 200;
 
-    //plt::figure(); //causes segmentation fault
-    plt::backend("MacOSX"); //MacOSX, TKAgg, Qt4Agg, Qt4Agg //, cairo
-    plt::ion();
+    std::cout << std::endl << "STARTING BasicSPH... " << std::endl << std::endl;
+    Timer t;
+
+
+    Visualization visualization{"MacOSX", 16, 0, 1200, 0, 180};
+
 
     // Plot line from given x and y data. Color is selected automatically.
     std::vector<double> x_vec, y_vec;
 
-	for (int i = 0; i < 1000; i++) {
-	    std::cout << "i = " << i << std::endl;
+    std::cout << std::endl;
+
+    int bar_width = 70;
+    std::cout << std::endl << "Progress:" << std::endl;
+	for (int i = 0; i <= no_of_loops; i++) {
+
+        float progress = i/(float)no_of_loops;
+        progress_bar(progress, bar_width);
+
 	    update();
-	    //if (i % 10 == 0) {
-	    if (true) {
+
+	    // visualization
+	    if (visualize && i % 2 == 0) {
             x_vec.clear();
             y_vec.clear();
             for (auto &p : particle_handler.particles)
@@ -122,23 +95,36 @@ int main(int argc, char **argv)
                 x_vec.push_back(p.x(0));
                 y_vec.push_back(p.x(1));
             }
-            plt::clf();
-            plt::xlim(0, 1200);
-            plt::ylim(0, 400);
-            plt::scatter(x_vec, y_vec, 16);
-            plt::show(false);
-            plt::pause(0.001);
+            visualization.update(x_vec, y_vec);
+
 	    }
 	}
 
-    //plt::show(true); //block: false ?
-    std::cout << "Hallo" << std::endl;
-	//plt::close();
-	//x_vec.clear();
-	//y_vec.clear();
-    //~x_vec();
-    //~y_vec();
+    std::cout << std::endl << std::endl << "Elapsed time: " << t.elapsed() << " seconds." << std::endl;
+
+	//evaluation of computational time
+	std::cout << std::endl;
+	std::cout << "Elapsed time for Density & Pressure: " << std::endl;
+	std::cout << "\tTotal:    "
+	          << std::accumulate(time_density_pressure.begin(), time_density_pressure.end(), 0.0)
+	          << " s" << std::endl;
+    std::cout << "\tAveraged: "
+              << std::accumulate(time_density_pressure.begin(), time_density_pressure.end(), 0.0) / time_density_pressure.size()
+              << " s" << std::endl;
+    std::cout << "Elapsed time for Forces: " << std::endl;
+    std::cout << "\tTotal:    "
+              << std::accumulate(time_forces.begin(), time_forces.end(), 0.0)
+              << " s" << std::endl;
+    std::cout << "\tAveraged: "
+              << std::accumulate(time_forces.begin(), time_forces.end(), 0.0) / time_forces.size()
+              << " s" << std::endl;
+    std::cout << "Elapsed time for Integration: " << std::endl;
+    std::cout << "\tTotal:    "
+              << std::accumulate(time_integration.begin(), time_integration.end(), 0.0)
+              << " s" << std::endl;
+    std::cout << "\tAveraged: "
+              << std::accumulate(time_integration.begin(), time_integration.end(), 0.0) / time_integration.size()
+              << " s" << std::endl;
 
 	return 0;
-
 }

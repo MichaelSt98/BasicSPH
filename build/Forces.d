@@ -1,5 +1,5 @@
-./build/Particle.o: src/Particle.cpp src/../include/Particle.h \
-  include/../include/Settings.h /usr/local/include/eigen3/Eigen/Dense \
+./build/Forces.o: src/Forces.cpp src/../include/Forces.h include/Settings.h \
+  /usr/local/include/eigen3/Eigen/Dense \
   /usr/local/include/eigen3/Eigen/Core \
   /usr/local/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h \
   /usr/local/include/eigen3/Eigen/src/Core/util/Macros.h \
@@ -173,10 +173,11 @@
   /usr/local/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h \
   /usr/local/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h \
   /usr/local/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h \
-  /usr/local/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h
-src/Particle.cpp:
-src/../include/Particle.h:
-include/../include/Settings.h:
+  /usr/local/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h \
+  include/Particle.h include/../include/Settings.h
+src/Forces.cpp:
+src/../include/Forces.h:
+include/Settings.h:
 /usr/local/include/eigen3/Eigen/Dense:
 /usr/local/include/eigen3/Eigen/Core:
 /usr/local/include/eigen3/Eigen/src/Core/util/DisableStupidWarnings.h:
@@ -352,3 +353,5 @@ include/../include/Settings.h:
 /usr/local/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h:
 /usr/local/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h:
 /usr/local/include/eigen3/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h:
+include/Particle.h:
+include/../include/Settings.h:

@@ -32,7 +32,9 @@ LIB         := -framework OpenGL -framework GLUT
 INC         := -I$(INCDIR) -I/usr/local/include -I/usr/include/opengl -I./include -DNDEBUG
 INCDEP      := -I$(INCDIR)
 
-PY_LDFLAGS  += $(shell if $(PYTHON_CONFIG) --ldflags --embed >/dev/null; then $(PYTHON_CONFIG) --ldflags --embed; else $(PYTHON_CONFIG) --ldflags; fi)
+PY_LDFLAGS  += $(shell if $(PYTHON_CONFIG) --ldflags --embed >/dev/null 2>&1; \
+						then $(PYTHON_CONFIG) --ldflags --embed; \
+						else $(PYTHON_CONFIG) --ldflags; fi)
 
 EXTRA_FLAGS += $(shell $(PYTHON_BIN) $(CURDIR)/numpy_flags.py)
 WITHOUT_NUMPY := $(findstring $(EXTRA_FLAGS), WITHOUT_NUMPY) 
@@ -75,13 +77,15 @@ cleaner: clean
 -include $(OBJECTS:.$(OBJEXT)=.$(DEPEXT)) #$(INCDIR)/matplotlibcpp.h
 
 #link
-$(TARGET): $(OBJECTS) #$(INCDIR)/matplotlibcpp.h
-	$(CXX) $(LFLAGS) $(PY_LDFLAGS) $(INC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
+$(TARGET): $(OBJECTS)
+	@echo "Linking ..."
+	@$(CXX) $(LFLAGS) $(PY_LDFLAGS) $(INC) -o $(TARGETDIR)/$(TARGET) $^ $(LIB)
 
 #compile
-$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) #$(INCDIR)/matplotlibcpp.h
+$(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
+	@echo "  compiling: " $(SRCDIR)/$*
 	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) $(EXTRA_FLAGS) $(INC) -c -o $@ $< $(PY_LDFLAGS)
+	@$(CXX) $(CXXFLAGS) $(EXTRA_FLAGS) $(INC) -c -o $@ $<
 	@$(CXX) $(CXXFLAGS) $(EXTRA_FLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(BUILDDIR)/$*.$(DEPEXT)
 	@cp -f $(BUILDDIR)/$*.$(DEPEXT) $(BUILDDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(BUILDDIR)/$*.$(OBJEXT):|' < $(BUILDDIR)/$*.$(DEPEXT).tmp > $(BUILDDIR)/$*.$(DEPEXT)
@@ -92,7 +96,8 @@ $(BUILDDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT) #$(INCDIR)/matplotlibcpp.h
 #compile test files
 tester: directories
 ifneq ("$(wildcard $(TESTDIR)/*.$(SRCEXT) )","")
-	$(CXX) $(CXXFLAGS) test/*.cpp $(INC) $(LIB) -o bin/tester
+	@echo "  compiling: " test/*
+	@$(CXX) $(CXXFLAGS) test/*.cpp $(INC) $(LIB) -o bin/tester
 else
 	@echo "No $(SRCEXT)-files within $(TESTDIR)!"
 endif
@@ -101,7 +106,8 @@ endif
 #compile idea files
 ideas: directories
 ifneq ("$(wildcard $(IDEASDIR)/*.$(SRCEXT) )","")
-	$(CXX) $(CXXFLAGS) ideas/*.cpp $(INC) $(LIB) -o bin/ideas
+	@echo "  compiling: " ideas/*
+	@$(CXX) $(CXXFLAGS) ideas/*.cpp $(INC) $(LIB) -o bin/ideas
 else
 	@echo "No $(SRCEXT)-files within $(IDEASDIR)!"
 endif

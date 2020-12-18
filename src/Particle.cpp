@@ -3,7 +3,6 @@
 //
 
 #include "../include/Particle.h"
-#include "../include/Settings.h"
 
 Particle::Particle(float _x, float _y)  : x(_x, _y), v(0.f, 0.f), f(0.f, 0.f), rho(0), p(0.f)
 {
@@ -31,10 +30,10 @@ ParticleHandler::~ParticleHandler(){
 
 void ParticleHandler::init_distribution()
 {
-    std::cout << "initializing dam break with " << DAM_PARTICLES << " particles" << std::endl;
-    for (float y = EPS; y < VIEW_HEIGHT - EPS * 2.f; y += H)
-        for (float x = VIEW_WIDTH / 4; x <= VIEW_WIDTH / 2; x += H)
-            if (particles.size() < DAM_PARTICLES)
+    std::cout << "initializing dam break with " << settings::DAM_PARTICLES << " particles" << std::endl;
+    for (float y = settings::EPS; y < settings::VIEW_HEIGHT - settings::EPS * 2.f; y += settings::H)
+        for (float x = settings::VIEW_WIDTH / 4; x <= settings::VIEW_WIDTH / 2; x += settings::H)
+            if (particles.size() < settings::DAM_PARTICLES)
             {
                 float jitter = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
                 particles.push_back(Particle(x + jitter, y));
