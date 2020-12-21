@@ -13,6 +13,7 @@
 #include "../include/Visualization.h"
 #include "../include/Utils.h"
 #include "../include/Logger.h"
+#include "../include/FileWriter.h"
 
 namespace plt = matplotlibcpp;
 
@@ -131,6 +132,16 @@ int main(int argc, char **argv)
     std::cout << "\tAveraged: "
               << std::accumulate(time_integration.begin(), time_integration.end(), 0.0) / time_integration.size()
               << " s" << std::endl;
+
+    FileWriter fw("test.txt");
+
+    fw << 123;
+    // or equivalent:
+    //fw.write<int> (123);
+    std::string str = "test";
+    fw << str;
+    // or equivalent:
+    //fw.write<std::string> (str);
 
 	return 0;
 }
